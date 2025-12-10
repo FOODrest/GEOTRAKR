@@ -24,7 +24,27 @@
     <div class="app">
 
       <aside class="sidebar">
-
+        <h2 class="title">GeoTrackr 📍</h2>
+        <form action="" class="form" id="form">
+          <div>
+            <label for="type_session">type d'entraînement</label>
+            <select name="type_session" id="type_session">
+              <option value="">selectionné l'entraînement</option>
+              <option value="cycling">Vélo</option>
+              <option value="running">Course</option>
+            </select>
+          </div>
+          <div>
+            <label for="distance">Distance (km)</label>
+            <input type="number" name="distance" id="distance" required>
+          </div>
+          <div>
+            <label for="duration">Durée (min)</label>
+            <input type="number" name="duration" id="duration" required>
+          </div>
+          <div id="movement_type"></div>
+          <button type="button" id="add">Ajouter</button>
+        </form>
       </aside>
 
       <main class="map-container">

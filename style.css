@@ -47,6 +47,68 @@ body {
   width: 100%;
 }
 
+.title{
+  text-align: center;
+  margin-top: 1vh;
+  margin-bottom: 2rem;
+}
+
+form{
+  display: block;
+  background-color: #222739;
+  border-radius: 0.7em;
+  padding-top: 1.6em;
+  padding-bottom: 1.6em;
+  display: none;
+}
+
+form div{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+form label {
+  margin-bottom: 0.8rem;
+  font-size: 0.9em;
+  margin-left: 15%;
+}
+
+form select {
+  height: 2rem;
+  width: 70%;
+  margin-left: 15%;
+  border: none;
+  border-radius: 0.6em;
+  font-size: 0.9em;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+form input{
+  height: 2rem;
+  width: 70%;
+  margin-left: 15%;
+  border: none;
+  border-radius: 0.6em;
+}
+
+form button{
+  margin-top: 1.2rem;
+  margin-left: 25%;
+  width: 50%;
+  height: 2rem;
+  border: none;
+  border-radius: 0.6em;
+  background-color: #3b82f6;
+  color: aliceblue;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+form button:hover{
+  background-color: #316bc7;
+}
+
 /* Responsive simple : mobile = layout vertical */
 @media (max-width: 768px) {
   .app {

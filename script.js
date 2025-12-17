@@ -14,49 +14,47 @@
 
 console.log("GeoTrakr - point de départ du projet");
 
-/*
-if ("geolocation" in navigator){
-  navigator.geolocation.getCurrentPosition(
-    function (position){
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      console.log(`Position trouvée : ${latitude}, ${longitude}`);
-      const map = L.map('map').setView([latitude,longitude],15);
-      L.tileLayer(
-        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-      }
-      ).addTo(map);
-      L.marker([latitude, longitude])
-        .addTo(map)
-        .bindPopup("📍 You are here !")
-        .openPopup();
-
-    }
-  )
-
+class Session {
+  constructor(coords, distance, duration){
+    this.id = (Date.now()+ "").slice(-10);
+    this.date = new Date().toLocaleDateString("fr-FR");
+    this.coords = coords;
+    this.distance = distance;
+    this.duration = duration;
+    this._setDescription();
+  }
+  _setDescription(){
+    this.description = `Id : ${this.id} date : ${this.date} - Distance : ${this.distance} km, Durée : ${this.duration} min`;
+  }
 }
-*/
 
-class Session{
-  constructor({coords, distance, duration, type}){
-    this.id = (Date.now()+'').slice(-10);
-    this.date = new Date();
-    this.coords = coords;//[lat,lng]
-    this.distance =+distance;
-    this.duration =+duration;
-    this.type = type;
+class RunSession extends Session{
+  constructor(coords,distance,duration,cadence){
+    super(coords,distance,duration);
+    this.cadence = cadence;
+    this.type = "running";
+    this.pace=(duration/distance).toFixed(1);
   }
-  getSummary(){
-    return {
-      id: this.id,
-      date: this.date.toISOString(),
-      type: this.type,
-      distance: this.distance,
-      duration: this.duration
-    };
+  _setDescription(){
+    this.description = `Id : ${this.id}, type : ${this.type} date : ${this.date} - Distance : ${this.distance} km, Durée : ${this.duration} min, Allure : ${this.pace} min/km`;
+  }
+}
 
+class BikeSession extends Session {
+  constructor(coords, distance, duration, elevationGain){
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    this.type = "cycling";
+    this.speed = (distance / (duration / 60)).toFixed(1);
   }
+  _setDescription(){
+    this.description = `Id : ${this.id}, type : ${this.type} date : ${this.date} - Distance : ${this.distance} km, Durée : ${this.duration} min, Vitesse : ${this.speed} km/h`;
+  }
+}
+
+
+class ActivityManager {
+  
+
 
 }

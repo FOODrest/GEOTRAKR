@@ -98,7 +98,69 @@ class BikeSession extends Session {
 
 
 class ActivityManager {
-  
+  map;
+  sessions = [];
 
+  constructor() {
+    this.mapContainer = document.getElementById("map");
+    if (!this.mapContainer) return;
 
+    this._getPosition();
+  }
+
+  _getPosition() {
+    if (!navigator.geolocation) {
+      this._initMap([30.4278, -9.58]);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      this._onPositionSuccess.bind(this),
+      this._onPositionError.bind(this)
+    );
+  }
+
+  _onPositionSuccess(position) {
+    const { latitude, longitude } = position.coords;
+  const coords = [latitude, longitude];
+
+  this._initMap(coords);
+  this._showUserPosition(coords);
+
+  }
+
+  _onPositionError() {
+    this._initMap([30.4278, -9.58]);
+  }
+
+  _initMap(coords) {
+    this.map = L.map("map").setView(coords, 13);
+
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+      }
+    ).addTo(this.map);
+
+    this.map.on("click", this._showForm);
+  }
+
+  _showForm = (e) => {
+    console.log("Map clicked:", e.latlng);
+    form.style.display = "block";
+  };
+
+  _showUserPosition(coords) {
+    L.marker(coords)
+      .addTo(this.map)
+      .bindPopup("📍 Vous êtes ici")
+      .openPopup();
+  }
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  new ActivityManager();
+});
+

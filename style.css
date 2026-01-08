@@ -109,6 +109,24 @@ form button:hover{
   background-color: #316bc7;
 }
 
+.activities{
+  list-style: none;
+  margin-top: 16px;
+  overflow-y: auto;
+  flex: 1; /* pour prendre le reste de la sidebar */
+  padding-right: 6px;
+}
+
+.activity{
+  background:#11162a;
+  border:1px solid #222738;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+
+
 /* Responsive simple : mobile = layout vertical */
 @media (max-width: 768px) {
   .app {
